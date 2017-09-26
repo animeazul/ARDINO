@@ -1,0 +1,143 @@
+﻿<xml xmlns="http://www.w3.org/1999/xhtml" collection="false">
+  <block type="trade" id="73vWdDagX-YhN)CtN.3D" x="300" y="-73">
+    <field name="MARKET_LIST">forex</field>
+    <field name="SUBMARKET_LIST">major_pairs</field>
+    <field name="SYMBOL_LIST">frxEURUSD</field>
+    <field name="TRADETYPECAT_LIST">callput</field>
+    <field name="TRADETYPE_LIST">risefall</field>
+    <field name="TYPE_LIST">both</field>
+    <field name="CANDLEINTERVAL_LIST">60</field>
+    <field name="TIME_MACHINE_ENABLED">FALSE</field>
+    <field name="RESTARTONERROR">TRUE</field>
+    <statement name="SUBMARKET">
+      <block type="tradeOptions" id="$-0`])i6i_T(K+f{gk]j">
+        <field name="DURATIONTYPE_LIST">t</field>
+        <field name="CURRENCY_LIST">USD</field>
+        <value name="DURATION">
+          <block type="math_number" id="0p-bjjEuB1k(LNWLaiS]">
+            <field name="NUM">10</field>
+          </block>
+        </value>
+        <value name="AMOUNT">
+          <block type="math_number" id="|tIC~6lHx]cKt9rf1jFk">
+            <field name="NUM">0.5</field>
+          </block>
+        </value>
+      </block>
+    </statement>
+  </block>
+  <block type="before_purchase" id="tOc)]Xd=cAm0aiy+-8(8" x="287" y="250">
+    <statement name="BEFOREPURCHASE_STACK">
+      <block type="variables_set" id="5Q^e].FZBAZ}VpVwMB[_">
+        <field name="VAR">Price Difference</field>
+        <value name="VALUE">
+          <block type="payout" id="Up/=YVZnu=d}{sR~,O^@">
+            <field name="PURCHASE_LIST">CALL</field>
+          </block>
+        </value>
+        <next>
+          <block type="variables_set" id="-1pJajeMgtXhHt;V}^;;">
+            <field name="VAR">Price Difference down</field>
+            <value name="VALUE">
+              <block type="payout" id="cHs@n{I#:7hHbCEh]snI">
+                <field name="PURCHASE_LIST">PUT</field>
+              </block>
+            </value>
+            <next>
+              <block type="notify" id="EmXG@e*rqlsNgp`9=aT9">
+                <field name="NOTIFICATION_TYPE">success</field>
+                <field name="NOTIFICATION_SOUND">silent</field>
+                <value name="MESSAGE">
+                  <shadow type="text" id="ApI.@b}6(1QuO4E)Kb67">
+                    <field name="TEXT"></field>
+                  </shadow>
+                  <block type="text_join" id="pe@P-+;O8$FOXkzQRJS]">
+                    <mutation items="2"></mutation>
+                    <value name="ADD0">
+                      <block type="text" id="0dTZQ6CU+J5ZxR,uq@(d">
+                        <field name="TEXT">PRICE DIFERENCE IS</field>
+                      </block>
+                    </value>
+                    <value name="ADD1">
+                      <block type="variables_get" id="bVxf{s#W}c%`#l^Ybyko">
+                        <field name="VAR">Price Difference</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="notify" id="dFLHHZ}Q-gNVLl=+nGFr">
+                    <field name="NOTIFICATION_TYPE">success</field>
+                    <field name="NOTIFICATION_SOUND">silent</field>
+                    <value name="MESSAGE">
+                      <shadow type="text" id="ApI.@b}6(1QuO4E)Kb67">
+                        <field name="TEXT"></field>
+                      </shadow>
+                      <block type="text_join" id="RFuT~#aR9F^v)zkSW]bS">
+                        <mutation items="2"></mutation>
+                        <value name="ADD0">
+                          <block type="text" id="=;+5jV$L`%HPwA_@P$PE">
+                            <field name="TEXT">PRICE DIFERENCE DOWN IS</field>
+                          </block>
+                        </value>
+                        <value name="ADD1">
+                          <block type="variables_get" id="`(X:GlqSxfLKiHrP67`F">
+                            <field name="VAR">Price Difference down</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="controls_if" id="GiBSMAK``jc+2wUR)}fp">
+                        <value name="IF0">
+                          <block type="logic_operation" id="w/K!#0+)L,~^0tj/=`NM">
+                            <field name="OP">AND</field>
+                            <value name="A">
+                              <block type="logic_compare" id="-uI#`ve5(cIMU4eA6m4s">
+                                <field name="OP">GT</field>
+                                <value name="A">
+                                  <block type="variables_get" id="%IkifEw_e5A|C:h56l^T">
+                                    <field name="VAR">Price Difference</field>
+                                  </block>
+                                </value>
+                                <value name="B">
+                                  <block type="math_number" id="?8|[Y[gDLSROJPr2C$,Z">
+                                    <field name="NUM">1.01</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <block type="logic_compare" id="X1:sb6%Q$T;O=]tvOIO3">
+                                <field name="OP">GT</field>
+                                <value name="A">
+                                  <block type="variables_get" id="v3Vs:7;W0R$2B5(PXYoA">
+                                    <field name="VAR">Price Difference down</field>
+                                  </block>
+                                </value>
+                                <value name="B">
+                                  <block type="math_number" id="_aQRwK;m?l3+G;z/B7;M">
+                                    <field name="NUM">1.01</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <statement name="DO0">
+                          <block type="purchase" id="Q;`vp48|v7pG%t@W6`uQ">
+                            <field name="PURCHASE_LIST">PUT</field>
+                          </block>
+                        </statement>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>
